@@ -53,20 +53,20 @@ router.get('/:id', async (req, res, next) => {
 router.post('/', async (req, res, next) => {
   try {
     const flight = await Flights.create({
-      // date: req.body.date,
+      date: req.body.date,
       origin: req.body.origin,
       destination: req.body.destination,
       price: req.body.price,
       flight_number: req.body.flight_number,
       departure_at: req.body.departure_at,
       airline: req.body.airline,
-      // travelers: req.body.travelers,
+      travelers: req.body.travelers,
     });
     console.log(req.body.userId);
-    // const user = await Users.findByPk(req.body.userId);
-    // const cart = await user.getCart();
-    // console.log('...........', cart);
-    // flight.addCart(cart.id);
+    const user = await Users.findByPk(req.body.userId);
+    const cart = await user.getCart();
+    console.log('...........', cart);
+    flight.addCart(cart.id);
     res.json(flight);
   } catch (error) {
     console.log('post flight', error);
