@@ -56,6 +56,7 @@ export const getUser = (id) => {
 export const updateUser = (id, userInfo) => {
   return async (dispatch) => {
     try {
+      console.log('user info', userInfo);
       const { data } = await axios.put(`/api/users/${id}`, userInfo);
       dispatch(setAuth(data[0]));
     } catch (e) {

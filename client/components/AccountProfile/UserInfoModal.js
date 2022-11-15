@@ -6,13 +6,18 @@ const UserInfoModal = ({
   handleSubmit,
   handleChange,
   popUpToggle,
+  changeContent,
 }) => {
   return (
     <div>
       {popUpToggle && (
         <div className='pop-up-container'>
           <div className='pop-up-body' onClick={(e) => e.stopPropagation()}>
-            <div className='pop-up-header'></div>
+            <div className='pop-up-header'>
+              <button className='pop-up-x' onClick={changeContent}>
+                X
+              </button>
+            </div>
             <div className='pop-up-content'>
               <div className='pop-up-card'>
                 <h4>User Name</h4>

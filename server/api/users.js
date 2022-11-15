@@ -29,7 +29,6 @@ router.get('/:id', async (req, res, next) => {
         id: req.params.id,
       },
     });
-
     res.send(user);
   } catch (e) {
     next(e);
