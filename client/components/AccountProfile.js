@@ -4,6 +4,7 @@ import { connect, useDispatch } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { updateUser } from '../store';
+import ProfileInfo from './AccountProfile/ProfileInfo';
 
 const AccountProfile = ({ handleClick, user }) => {
   const dispatch = useDispatch();
@@ -32,6 +33,7 @@ const AccountProfile = ({ handleClick, user }) => {
     console.log('user info', userInfo);
     e.preventDefault();
     dispatch(updateUser(user.id, userInfo));
+    changeContent();
   }
 
   useEffect(() => {
@@ -42,222 +44,27 @@ const AccountProfile = ({ handleClick, user }) => {
   return (
     <div className='profile-container'>
       {user.role === 'user' ? (
-        <div className='account-details'>
-          <h1 className='account-title'>{user.username}'s Account Profile</h1>
-          <div className='user-details'>
-            <h4>Username</h4>
-            <p className='user-info'>{user.username}</p>
-          </div>
-          <div className='user-details'>
-            <h4>Name</h4>
-            <p className='user-info'>
-              {user.firstName} {user.lastName}
-            </p>
-          </div>
-          <div className='user-details'>
-            <h4>Email</h4>
-            <p className='user-info'>{user.email}</p>
-          </div>
-          <div className='user-details'>
-            <h4>Phone Number</h4>
-            <p className='user-info'>{user.phone}</p>
-          </div>
-          <button type='submit' className='logout-button'>
-            <a href='#' onClick={handleClick}>
-              Logout
-            </a>
-          </button>
-          <button
-            type='submit'
-            className='edit-button'
-            onClick={() => changeContent({ user })}
-          >
-            Edit
-          </button>
-          {popUpToggle && (
-            <div className='pop-up-container'>
-              <div className='pop-up-body' onClick={(e) => e.stopPropagation()}>
-                <div className='pop-up-header'>
-                  <button className='pop-up-x' onClick={changeContent}>
-                    X
-                  </button>
-                </div>
-                <div className='pop-up-content'>
-                  <div className='pop-up-card'>
-                    <h4>User Name</h4>
-                    <input
-                      type='text'
-                      name='username'
-                      value={userInfo.username}
-                      placeholder={user.username}
-                      onChange={handleChange}
-                    />
-                  </div>
-                  <div className='pop-up-card'>
-                    <h4>First Name</h4>
-                    <input
-                      type='text'
-                      name='firstName'
-                      value={userInfo.firstName}
-                      placeholder={user.firstName}
-                      onChange={handleChange}
-                    />
-                  </div>
-                  <div className='pop-up-card'>
-                    <h4>Last Name</h4>
-                    <input
-                      type='text'
-                      name='lastName'
-                      value={userInfo.lastName}
-                      placeholder={user.lastName}
-                      onChange={handleChange}
-                    />
-                  </div>
-                  <div className='pop-up-card'>
-                    <h4>Email</h4>
-                    <input
-                      type='text'
-                      name='email'
-                      value={userInfo.email}
-                      placeholder={user.email}
-                      onChange={handleChange}
-                    />
-                  </div>
-                  <div className='pop-up-card'>
-                    <h4>Phone Number</h4>
-                    <input
-                      type='text'
-                      name='phone'
-                      value={userInfo.phone}
-                      placeholder={user.phone}
-                      onChange={handleChange}
-                    />
-                  </div>
-                  <button
-                    type='submit'
-                    className='edit-button'
-                    // onClick={updateUser(user.id, userInfo)}
-                    onClick={handleSubmit}
-                  >
-                    Save
-                  </button>
-                </div>
-              </div>
-            </div>
-          )}
-        </div>
+        <ProfileInfo
+          user={user}
+          userInfo={userInfo}
+          handleClick={handleClick}
+          handleChange={handleChange}
+          handleSubmit={handleSubmit}
+          popUpToggle={popUpToggle}
+          changeContent={changeContent}
+          role={user.role}
+        />
       ) : (
-        <div className='account-details'>
-          <h1 className='account-title'>
-            <div>
-              {user.username}'s' {user.role} Dashboard
-            </div>
-            <small className='admin-task'>
-              <Link to={`/admin/manageusers/${user.id}`}>Manage Users</Link>
-            </small>
-          </h1>
-          <hr style={{ color: 'black' }} />
-          <div className='user-details'>
-            <h4>Username</h4>
-            <p className='user-info'>{user.username}</p>
-          </div>
-          <div className='user-details'>
-            <h4>Name</h4>
-            <p className='user-info'>
-              {user.firstName} {user.lastName}
-            </p>
-          </div>
-          <div className='user-details'>
-            <h4>Email</h4>
-            <p className='user-info'>{user.email}</p>
-          </div>
-          <div className='user-details'>
-            <h4>Phone Number</h4>
-            <p className='user-info'>{user.phone}</p>
-          </div>
-          <button type='submit' className='logout-button'>
-            <a href='#' onClick={handleClick}>
-              Logout
-            </a>
-          </button>
-          <button
-            type='submit'
-            className='edit-button'
-            onClick={() => changeContent({ user })}
-          >
-            Edit
-          </button>
-          {popUpToggle && (
-            <div className='pop-up-container'>
-              <div className='pop-up-body' onClick={(e) => e.stopPropagation()}>
-                <div className='pop-up-header'>
-                  <button className='pop-up-x' onClick={changeContent}>
-                    X
-                  </button>
-                </div>
-                <div className='pop-up-content'>
-                  <div className='pop-up-card'>
-                    <h4>User Name</h4>
-                    <input
-                      type='text'
-                      name='username'
-                      value={userInfo.username}
-                      placeholder={user.username}
-                      onChange={handleChange}
-                    />
-                  </div>
-                  <div className='pop-up-card'>
-                    <h4>First Name</h4>
-                    <input
-                      type='text'
-                      name='firstName'
-                      value={userInfo.firstName}
-                      placeholder={user.firstName}
-                      onChange={handleChange}
-                    />
-                  </div>
-                  <div className='pop-up-card'>
-                    <h4>Last Name</h4>
-                    <input
-                      type='text'
-                      name='lastName'
-                      value={userInfo.lastName}
-                      placeholder={user.lastName}
-                      onChange={handleChange}
-                    />
-                  </div>
-                  <div className='pop-up-card'>
-                    <h4>Email</h4>
-                    <input
-                      type='text'
-                      name='email'
-                      value={userInfo.email}
-                      placeholder={user.email}
-                      onChange={handleChange}
-                    />
-                  </div>
-                  <div className='pop-up-card'>
-                    <h4>Phone Number</h4>
-                    <input
-                      type='text'
-                      name='phone'
-                      value={userInfo.phone}
-                      placeholder={user.phone}
-                      onChange={handleChange}
-                    />
-                  </div>
-                  <button
-                    type='submit'
-                    className='edit-button'
-                    onClick={handleSubmit}
-                  >
-                    Save
-                  </button>
-                </div>
-              </div>
-            </div>
-          )}
-        </div>
+        <ProfileInfo
+          user={user}
+          userInfo={userInfo}
+          handleClick={handleClick}
+          handleChange={handleChange}
+          handleSubmit={handleSubmit}
+          popUpToggle={popUpToggle}
+          changeContent={changeContent}
+          role={user.role}
+        />
       )}
     </div>
   );

@@ -33,7 +33,7 @@ class Routes extends Component {
           <Route path='/created' component={AccountCreated} />
           <Route path='/flights' component={AllFlights} />
           <Route path='/profile/:id' component={AccountProfile} />
-          <Route path='/admin/manageusers/:id' component={ManageUsers}/>
+          <Route path='/admin/manageusers/:id' component={ManageUsers} />
         </Switch>
       </div>
     );

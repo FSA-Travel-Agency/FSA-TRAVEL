@@ -15,6 +15,7 @@ function AllFlights(props) {
     <div className='card-container'>
       {flights.map(([k, flight]) => {
         return (
+
           <FlightCard flight={flight} k={k} changeContent={changeContent} />
         );
       })}
@@ -28,7 +29,9 @@ function AllFlights(props) {
             </div>
             <div className='pop-up-content'>
               {popUpContent.map((flight) => {
+
                 return <DetailsCard flight={flight} />;
+
               })}
             </div>
           </div>

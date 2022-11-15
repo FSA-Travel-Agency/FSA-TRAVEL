@@ -560,3 +560,9 @@ body.active-modal {
 .user {
   margin: 1rem;
 }
+
+.user:hover {
+  cursor: pointer;
+  color: blue;
+  text-decoration: underline;
+}
