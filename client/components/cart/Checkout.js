@@ -12,7 +12,6 @@ const Checkout = () => {
 
   return (
     <div className='checkout'>
-      <h1 className='checkout-title'>Checkout</h1>
       <div className='checkout-item'>
         <h2>Please enter your payment info:</h2>
         <div className='checkout-payment'>

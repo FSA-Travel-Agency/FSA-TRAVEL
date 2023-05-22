@@ -13,7 +13,7 @@ const Navbar = ({ isLoggedIn, userId }) => (
         <div className='dropdown'>
           <button className='dropbtn'>
             Account
-            <i class='fa fa-caret-down'></i>
+            <i className='fa fa-caret-down'></i>
           </button>
           <div className='dropdown-content'>
             <Link to={`/profile/${userId}`} className='nav-link float-account'>

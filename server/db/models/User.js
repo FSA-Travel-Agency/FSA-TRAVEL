@@ -52,6 +52,7 @@ const User = db.define('user', {
       isNumeric: true,
       notEmpty: true,
       len: [10, 10],
+      notEmpty: true,
     },
   },
 

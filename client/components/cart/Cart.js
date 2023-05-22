@@ -17,7 +17,6 @@ function Cart({ userId }) {
     if (userId) {
       dispatch(fetchCart(userId));
     } else {
-      console.log('no cart');
     }
   };
 
@@ -25,7 +24,6 @@ function Cart({ userId }) {
     if (userId) {
       dispatch(fetchCart(userId));
     } else {
-      console.log('loading');
     }
   }, [userId]);
 

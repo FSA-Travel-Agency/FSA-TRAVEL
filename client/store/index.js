@@ -18,9 +18,13 @@ const reducer = combineReducers({
   addCartReducer,
 });
 
-const middleware = composeWithDevTools(
-  applyMiddleware(thunkMiddleware, createLogger({ collapsed: true }))
-);
+//commenting loggermiddle ware if we need it back later
+// const middleware = composeWithDevTools(
+//   applyMiddleware(thunkMiddleware, createLogger({ collapsed: true }))
+// );
+//removing logger so there's no console log in deployed
+const middleware = composeWithDevTools(applyMiddleware(thunkMiddleware));
+
 const store = createStore(reducer, middleware);
 
 export default store;
