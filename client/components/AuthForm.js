@@ -47,44 +47,55 @@ const AuthForm = (props) => {
     dispatch(authenticate({ username, password }, formName));
   };
 
+  const quickLogin = (evt) => {
+    evt.preventDefault();
+    const formName = 'login';
+    dispatch(authenticate({ username: 'cody', password: '123' }, formName));
+  };
+
   return (
     <div className='login-signup-container'>
       {!isLoggedIn ? (
-        <form onSubmit={handleSubmit} name={name} className='login-container'>
-          <h2 className='login-elements'>{displayName}</h2>
-          <div className='login-elements'>
-            <label htmlFor='username'></label>
-            <input name='username' type='text' placeholder='Your Username' />
-          </div>
-          <div className='login-elements'>
-            <label htmlFor='password'></label>
-            <input
-              name='password'
-              type='password'
-              placeholder='Your Password'
-            />
-          </div>
-          <div className='login-elements'>
-            <button type='submit' className='form-button'>
-              {displayName}
-            </button>
-            <div id='logInDiv'></div>
-          </div>
-          {error && error.response && (
-            <div className='auth-error'>*{error.response.data}</div>
-          )}
-          <p className='signup-prompt'>
-            New here?{' '}
-            <Link to='/signup' className='signup-link'>
-              Sign up
-            </Link>
-          </p>
-          <div className='pop-up-icons'>
-            <FaFacebook size={35} />
-            <FaTwitter size={35} />
-            <FaInstagram size={35} />
-          </div>
-        </form>
+        <>
+          <form onSubmit={handleSubmit} name={name} className='login-container'>
+            <h2 className='login-elements'>{displayName}</h2>
+            <div className='login-elements'>
+              <label htmlFor='username'></label>
+              <input name='username' type='text' placeholder='Your Username' />
+            </div>
+            <div className='login-elements'>
+              <label htmlFor='password'></label>
+              <input
+                name='password'
+                type='password'
+                placeholder='Your Password'
+              />
+            </div>
+            <div className='login-elements'>
+              <button type='submit' className='form-button'>
+                {displayName}
+              </button>
+              <div className='recruiter-login' onClick={quickLogin}>
+                Recruiter or Guest?
+              </div>
+              <div id='logInDiv'></div>
+            </div>
+            {error && error.response && (
+              <div className='auth-error'>*{error.response.data}</div>
+            )}
+            <p className='signup-prompt'>
+              New here?{' '}
+              <Link to='/signup' className='signup-link'>
+                Sign up
+              </Link>
+            </p>
+            <div className='pop-up-icons'>
+              <FaFacebook size={35} />
+              <FaTwitter size={35} />
+              <FaInstagram size={35} />
+            </div>
+          </form>
+        </>
       ) : isLoggedIn && role === 'user' ? (
         <Redirect to='/home' />
       ) : isLoggedIn && role === 'admin' ? (
