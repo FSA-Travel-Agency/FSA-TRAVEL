@@ -24,6 +24,7 @@ const AuthForm = (props) => {
   });
   const [submitted, setSubmitted] = useState(false);
   const [valid, setValid] = useState(false);
+  const [signUpError, setError] = useState(null);
   const dispatch = useDispatch();
 
   function handleCallbackResponse(response) {
@@ -36,21 +37,21 @@ const AuthForm = (props) => {
     dispatch(authenticate(userObj, formName));
   }
 
-  useEffect(() => {
-    /* global google */
-    google.accounts.id.initialize({
-      client_id:
-        '53771139103-07bg91j6j0tt69k4n60b374sd0ugpm4g.apps.googleusercontent.com',
-      callback: handleCallbackResponse,
-    });
+  // useEffect(() => {
+  //   /* global google */
+  //   google.accounts.id.initialize({
+  //     client_id:
+  //       '53771139103-07bg91j6j0tt69k4n60b374sd0ugpm4g.apps.googleusercontent.com',
+  //     callback: handleCallbackResponse,
+  //   });
 
-    google.accounts.id.renderButton(document.getElementById('logInDiv'), {
-      theme: 'outline',
-      size: 'large',
-    });
+  //   google.accounts.id.renderButton(document.getElementById('logInDiv'), {
+  //     theme: 'outline',
+  //     size: 'large',
+  //   });
 
-    // google.accounts.id.prompt();
-  }, []);
+  //   // google.accounts.id.prompt();
+  // }, []);
 
   const handleChange = (event) => {
     setUser({ [event.target.name]: event.target.value });
@@ -66,12 +67,18 @@ const AuthForm = (props) => {
     const lastName = evt.target.lastName.value;
     const email = evt.target.email.value;
     const phone = evt.target.phone.value;
-    dispatch(
-      authenticate(
-        { username, password, firstName, lastName, email, phone },
-        formName
-      )
-    );
+
+    if (!phone || phone.length < 10) {
+      setError('Phone number must be 10 digits long');
+    } else {
+      setError(null);
+      dispatch(
+        authenticate(
+          { username, password, firstName, lastName, email, phone },
+          formName
+        )
+      );
+    }
   };
 
   return (
@@ -133,9 +140,10 @@ const AuthForm = (props) => {
             </button>
             <div id='logInDiv'></div>
           </div>
-          {error && error.response && (
+          {error?.response && !signUpError && (
             <div className='auth-error'>*{error.response.data}</div>
           )}
+          {signUpError && <div className='auth-error'>*{signUpError}</div>}
           <p className='signup-prompt'>
             Already have an account?{' '}
             <Link to='/login' className='signup-link'>
