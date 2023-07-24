@@ -1,6 +1,6 @@
 # FSA-TRAVEL
 
-Deployment URL: https://fsatravel.onrender.com/home
+Deployment URL: https://fsa-travel-glub.onrender.com
 
 ## Setup
 
